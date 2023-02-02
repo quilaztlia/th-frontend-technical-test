@@ -1,13 +1,13 @@
 <template>
   <div class="hello">
-    <div v-for="p in people" :key="p.id">
+    <!-- <div v-for="p in people" :key="p.id">
     <h2>{{ p.id }} - {{ p.firstname }}
       - {{ p.lastname }}
       - {{ p.email }}
       - {{ p.address.city }}
       - {{ p.address.country }}
     </h2>
-  </div>
+  </div> -->
   </div>
 
   <div> 
@@ -15,7 +15,7 @@
   <thead>
     <tr>
       <!-- loop through each value of the fields to get the table header -->
-      <th  v-for="field in fields" :key='field' @click="sortTable(field)" > 
+      <th  v-for="field in headers" :key='field' > 
         {{field}} <i class="bi bi-sort-alpha-down" aria-label='Sort Icon'></i>
        </th>
     </tr>
@@ -42,10 +42,12 @@ export default {
   },
   mounted () {
     this.getPeople()
+    this.setTableHeaders()
   },
   data () {
     return {
-      people: []
+      people: [],
+      headers: []
   }
 },
   methods: {
@@ -56,6 +58,9 @@ export default {
         .catch(error => {
           console.error('Panic at Backedn', error)
         })
+    },
+    setTableHeaders(){
+      this.headers = ['Id', 'FirstName', 'LastName', 'Email', 'Address-City', 'Address-Country' ]
     }
   }
 }
