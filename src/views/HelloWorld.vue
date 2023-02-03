@@ -1,5 +1,4 @@
 <template>
-
   <div>
     <button type="submit" @click="showNewPersonForm()">Add Person</button>
   </div>
