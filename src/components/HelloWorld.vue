@@ -99,6 +99,7 @@ export default {
   },
 
   setup() {
+    let peopleCounter = 10;
     const form = ref({
       firstname: '',
       lastname: '',
@@ -108,7 +109,7 @@ export default {
         country: ''
       }
     });
-    return { form }
+    return { form, peopleCounter }
   },
 
   mounted() {
@@ -139,30 +140,29 @@ export default {
       this.headers = ['Id', 'FirstName', 'LastName', 'Email', 'Address.City', 'Address.Country']
     },
 
-    showNewPersonForm(){
+    showNewPersonForm() {
       this.showEditPersonForm = false
       this.showAddNewPersonForm = true
 
-      this.form.firstname= '',
-      this.form.lastname= '',
-      this.form.email= '',
-      this.form.address.city =''
-      this.form.address.country= ''
+      this.form.firstname = '',
+        this.form.lastname = '',
+        this.form.email = '',
+        this.form.address.city = ''
+      this.form.address.country = ''
     },
     addPerson() {
-      console.log('addPerson: form')
-      console.log(this.form)
       let newPerson = {
-      id: '',
-      firstname: '',
-      lastname: '',
-      email: '',
-      address: {
-        city: '',
-        country: ''
-      }
-    };
-      newPerson.id = this.people.length + 1 
+        id: '',
+        firstname: '',
+        lastname: '',
+        email: '',
+        address: {
+          city: '',
+          country: ''
+        }
+      };
+      this.peopleCounter = this.peopleCounter + 1
+      newPerson.id = this.peopleCounter
       newPerson.firstname = this.form.firstname
       newPerson.lastname = this.form.lastname
       newPerson.email = this.form.email
@@ -170,15 +170,12 @@ export default {
       newPerson.address.country = this.form.address.country
 
       this.people = this.people.concat(newPerson)
-      console.log(this.people)
-    },    
+    },
     cancelAddPerson() {
       this.showAddNewPersonForm = false
     },
 
-    updatePerson() {
-      console.log('updatePerson')
-
+    updatePerson() {      
       let personId = this.form.id
       let editedPersonId = this.people.indexOf(p => p.id == personId)
       let editedPerson = this.people.filter(p => p.id == personId)[0]
@@ -186,7 +183,6 @@ export default {
       editedPerson.firstname = this.form.firstname
       editedPerson.lastname = this.form.lastname
       editedPerson.email = this.form.email
-      console.log(editedPerson)
       editedPerson.address.city = this.form.address.city
       editedPerson.address.country = this.form.address.country
 
@@ -202,9 +198,7 @@ export default {
       this.showEditPersonForm = true
       this.showAddNewPersonForm = false
 
-      console.log(selectedPerson.id)
       let editedPerson = this.people.filter(p => p.id == selectedPerson.id)[0]
-      console.log(editedPerson)
 
       this.form.id = editedPerson.id
       this.form.firstname = editedPerson.firstname
@@ -212,15 +206,14 @@ export default {
       this.form.email = editedPerson.email
       this.form.address.city = editedPerson.address.city
       this.form.address.country = editedPerson.address.country
-
-      console.log(selectedPerson)
     },
 
     deletePerson(personToDeleteId) {
-      this.people = this.people.filter(p => p.id != personToDeleteId)
-      console.log(this.people)
-    }
+      this.showEditPersonForm = false
+      this.showAddNewPersonForm = false
 
+      this.people = this.people.filter(p => p.id != personToDeleteId)
+    }
   }
 }
 </script>
