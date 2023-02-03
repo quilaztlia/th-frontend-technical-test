@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button type="submit">Add Person</button>
+    <h2>Add Person</h2>
   </div>
 </template>
 

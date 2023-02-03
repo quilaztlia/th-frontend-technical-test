@@ -92,7 +92,7 @@
 import { ref } from 'vue'
 
 export default {
-  name: 'HelloWorld',
+  name: 'PeopleTable',
   props: {
     msg: String
   },

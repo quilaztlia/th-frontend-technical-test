@@ -1,19 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <p> <router-link to="/">Table</router-link> </p>
+    <p><router-link to="edit-person">Edit Person</router-link></p>
+    <router-link to="add-person">Add Person</router-link>
+  </div>
+
   <router-view></router-view>
 </template>
-<!-- 
-<script>
-// import HelloWorld from './components/HelloWorld.vue'
 
-// export default {
-//   name: 'App',
-//   components: {
-//     HelloWorld
-//   }
-// }
-</script> -->
+<script>
+ //import PeopleTable from './views/PeopleTable.vue'
+
+ export default {
+   name: 'App',
+  //  components: {
+  //    PeopleTable
+  // }
+ }
+</script> 
 
 <style>
 #app {
