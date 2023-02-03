@@ -99,16 +99,6 @@ export default {
   },
 
   setup() {
-    // let newPerson = ref({
-    //   id: '',
-    //   firstname: '',
-    //   lastname: '',
-    //   email: '',
-    //   address: {
-    //     city: '',
-    //     country: ''
-    //   }
-    // });
     const form = ref({
       firstname: '',
       lastname: '',
@@ -118,9 +108,7 @@ export default {
         country: ''
       }
     });
-    return {
-      // newPerson, 
-      form }
+    return { form }
   },
 
   mounted() {
@@ -174,13 +162,12 @@ export default {
         country: ''
       }
     };
-      //newPerson = this.newPerson
       newPerson.id = this.people.length + 1 
       newPerson.firstname = this.form.firstname
-      // newPersona.value.lastname = this.form.lastname
-      // newPersona.value.email = this.form.email
-      // newPersona.value.address.city = this.form.address.city
-      // newPersona.value.address.country = this.form.address.country
+      newPerson.lastname = this.form.lastname
+      newPerson.email = this.form.email
+      newPerson.address.city = this.form.address.city
+      newPerson.address.country = this.form.address.country
 
       this.people = this.people.concat(newPerson)
       console.log(this.people)
@@ -215,7 +202,6 @@ export default {
       this.showEditPersonForm = true
       this.showAddNewPersonForm = false
 
-      //this.addPerson = false
       console.log(selectedPerson.id)
       let editedPerson = this.people.filter(p => p.id == selectedPerson.id)[0]
       console.log(editedPerson)
