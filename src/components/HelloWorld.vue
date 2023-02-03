@@ -1,16 +1,5 @@
 <template>
   <div class="hello">
-    <!-- <div v-for="p in people" :key="p.id">
-    <h2>{{ p.id }} - {{ p.firstname }}
-      - {{ p.lastname }}
-      - {{ p.email }}
-      - {{ p.address.city }}
-      - {{ p.address.country }}
-    </h2>
-  </div> -->
-  </div>
-
-  <div>
     <table id="tableComponent">
       <thead>
         <tr>
@@ -29,15 +18,15 @@
           <td> {{ person.address.city }}</td>
           <td> {{ person.address.country }} </td>
           <td><a href="#" @click="editPerson(person)">Edit</a> </td>
-          <td><a href="#" class="btn btn-danger" @click="deletePerson(person)">Delete</a></td>
+          <td><a href="#" class="btn btn-danger" @click="deletePerson(person.id)">Delete</a></td>
         </tr>
       </tbody>
     </table>
   </div>
 
-<div v-if="showEditPersonForm">
+<div v-if="showEditPersonForm || showAddNewPersonForm">
   <h2>Edit Person</h2>
-  <form v-on:submit.prevent="update(person)">
+  <form v-on:submit.prevent="updatePerson(person)">
     <div class="form-group">
       <label for="firstname">First Name: </label>
       <input type="text" name="firstname" placeholder="Enter First Name" v-model="form.firstname">
@@ -51,20 +40,38 @@
       <input type="text" name="email" placeholder="Email" v-model="form.email">
     </div>
     <div class="form-group">
-      <label for="addresse.city">: </label>
-      <input type="text" name="addresse.city" placeholder="Address.City" v-model="form.address.city">
+      <label for="addresse.city">Address.City: </label>
+      <input type="text" name="address.city" placeholder="Address.City" v-model="form.address.city">
     </div>
     <div class="form-group">
-      <label for="addresse.country">: </label>
-      <input type="text" name="addresse.country" placeholder="Address.City" v-model="form.address.city">
+      <label for="addresse.country">Address.Country: </label>
+      <input type="text" name="address.country" placeholder="Address.Country" v-model="form.address.country">
     </div>
-  <button type="submit" class="btn btn-primary">Update</button>
+    <div>
+      <button v-if="showAddNewPersonForm" type="submit" class="btn btn-primary" @click="addPerson()">Add</button>  
+    </div>
+    <div>
+      <button v-if="showEditPersonForm" type="submit" class="btn btn-primary">Update</button>
+    </div>
+  
 </form>
 </div>
 
 </template>
 
 <script>
+// import { ref } from 'vue'
+
+// const newPerson = ref({
+//         firstname: '',
+//         lastname: '', 
+//         email: '' ,
+//         address:{
+//           city: '',
+//           country: ''
+//         }
+//       })
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -77,6 +84,7 @@ export default {
   data() {
     return {
       showEditPersonForm: false,
+      showAddNewPersonForm: true,
       people: [],
       headers: [],
       form:{
@@ -87,7 +95,16 @@ export default {
           city: '',
           country: ''
         }
-      }      
+      },
+      newPerson:{
+        firstname: '',
+        lastname: '', 
+        email: '' ,
+        address:{
+          city: '',
+          country: ''
+        }
+      }            
     }
   },
   methods: {
@@ -100,24 +117,59 @@ export default {
         })
     },
     setTableHeaders() {
-      this.headers = ['Id', 'FirstName', 'LastName', 'Email', 'Address-City', 'Address-Country']
+      this.headers = ['Id', 'FirstName', 'LastName', 'Email', 'Address.City', 'Address.Country']
     },
+
+    addPerson() {
+      // this.showEditPersonForm = true
+      console.log('New person')
+      
+      // this.newPerson.id = this.form.id 
+      this.newPerson.firstname = this.form.firstname
+      this.newPerson.lastname = this.form.lastname
+      this.newPerson.email = this.form.email
+      this.newPerson.address.city = this.form.address.city
+      this.newPerson.address.country = this.form.address.country
+      
+      this.people.concat(this.newPerson)
+      // console.log(selectedPerson)
+    },
+
+    updatePerson(){           
+      // () => {
+        let personId =  this.form.id
+        let editedPersonId = this.people.indexOf(p => p.id == personId)
+      
+      this.people[editedPersonId].firstname = this.form.firstname
+      this.people[editedPersonId].lastname = this.form.lastname
+      this.people[editedPersonId].email = this.form.email
+      this.people[editedPersonId].address.city = this.form.address.city
+      this.people[editedPersonId].address.country = this.form.address.country            
+    },
+
     editPerson(selectedPerson) {
       this.showEditPersonForm = true
-      this.form.id = selectedPerson.id
-      this.form.firstname = selectedPerson.firstname
-      this.form.lastname = selectedPerson.lastname
-      this.form.email = selectedPerson.email
-      this.form.address.city = selectedPerson.city
+      this.addPerson = false
+      console.log(selectedPerson.id)
+      let editedPerson = this.people.filter(p => p.id == selectedPerson.id)[0]
+      console.log(editedPerson)
+
+      this.form.id = editedPerson.id
+      this.form.firstname = editedPerson.firstname
+      this.form.lastname = editedPerson.lastname
+      this.form.email = editedPerson.email
+      this.form.address.city = editedPerson.address.city
+      this.form.address.country = editedPerson.address.country
+      this.updatePerson()
 
       console.log(selectedPerson)
     },
-    deletePerson() {
 
-    },
-    updatePerson(personToUpdate){
-      console.log(personToUpdate)
+    deletePerson(personToDeleteId) {
+      this.people = this.people.filter(p => p.id != personToDeleteId)
+      console.log(this.people)
     }
+    
   }
 }
 </script>
