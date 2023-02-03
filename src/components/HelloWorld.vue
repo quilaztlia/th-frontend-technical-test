@@ -2,10 +2,9 @@
   <div class="hello">
     <table id="tableComponent">
       <thead>
-        <tr>
-          <!-- loop through each value of the fields to get the table header -->
+        <tr>          
           <th v-for="field in headers" :key='field'>
-            {{ field }} <i class="bi bi-sort-alpha-down" aria-label='Sort Icon'></i>
+            {{ field }} <i aria-label='Sort Icon'></i>
           </th>
         </tr>
       </thead>
@@ -48,10 +47,10 @@
       <input type="text" name="address.country" placeholder="Address.Country" v-model="form.address.country">
     </div>
     <div>
-      <button v-if="showAddNewPersonForm" type="submit" class="btn btn-primary" @click="addPerson()">Add</button>  
+      <button v-if="showAddNewPersonForm" type="submit" @click="addPerson()">Add</button>  
     </div>
     <div>
-      <button v-if="showEditPersonForm" type="submit" class="btn btn-primary">Update</button>
+      <button v-if="showEditPersonForm" type="submit" @click="updatePerson()">Update</button>
     </div>
   
 </form>
@@ -60,23 +59,36 @@
 </template>
 
 <script>
-// import { ref } from 'vue'
-
-// const newPerson = ref({
-//         firstname: '',
-//         lastname: '', 
-//         email: '' ,
-//         address:{
-//           city: '',
-//           country: ''
-//         }
-//       })
+import { ref } from 'vue'
 
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
   },
+
+  setup(){
+    const newPerson = ref({
+        firstname: '',
+        lastname: '', 
+        email: '' ,
+        address:{
+          city: '',
+          country: ''
+        }
+      });
+      const form = ref({
+        firstname: '',
+        lastname: '', 
+        email: '' ,
+        address:{
+          city: '',
+          country: ''
+        }
+      });
+      return  { newPerson, form}
+  },
+
   mounted() {
     this.getPeople()
     this.setTableHeaders()
@@ -86,25 +98,7 @@ export default {
       showEditPersonForm: false,
       showAddNewPersonForm: true,
       people: [],
-      headers: [],
-      form:{
-        firstname: '',
-        lastname: '', 
-        email: '' ,
-        address:{
-          city: '',
-          country: ''
-        }
-      },
-      newPerson:{
-        firstname: '',
-        lastname: '', 
-        email: '' ,
-        address:{
-          city: '',
-          country: ''
-        }
-      }            
+      headers: [],                
     }
   },
   methods: {
@@ -122,29 +116,36 @@ export default {
 
     addPerson() {
       // this.showEditPersonForm = true
-      console.log('New person')
-      
+      console.log('addPerson: form')
+      console.log(this.newPerson)
       // this.newPerson.id = this.form.id 
-      this.newPerson.firstname = this.form.firstname
-      this.newPerson.lastname = this.form.lastname
-      this.newPerson.email = this.form.email
-      this.newPerson.address.city = this.form.address.city
-      this.newPerson.address.country = this.form.address.country
+      // this.newPerson.firstname = this.form.firstname
+      // this.newPerson.lastname = this.form.lastname
+      // this.newPerson.email = this.form.email
+      // this.newPerson.address.city = this.form.address.city
+      // this.newPerson.address.country = this.form.address.country
       
-      this.people.concat(this.newPerson)
-      // console.log(selectedPerson)
+      // this.people.join(this.newPerson)
+      console.log('addPerson: form')
+      console.log(this.newPerson)
     },
 
-    updatePerson(){           
-      // () => {
-        let personId =  this.form.id
-        let editedPersonId = this.people.indexOf(p => p.id == personId)
+    updatePerson(){     
+      console.log('New person')
+            
+      let personId =  this.form.id
+      let editedPersonId = this.people.indexOf(p => p.id == personId)
+      let editedPerson = this.people.filter(p => p.id == personId)[0]
       
-      this.people[editedPersonId].firstname = this.form.firstname
-      this.people[editedPersonId].lastname = this.form.lastname
-      this.people[editedPersonId].email = this.form.email
-      this.people[editedPersonId].address.city = this.form.address.city
-      this.people[editedPersonId].address.country = this.form.address.country            
+      //
+      editedPerson.firstname = this.form.firstname
+      editedPerson.lastname = this.form.lastname
+      editedPerson.email = this.form.email
+      console.log(editedPerson)
+      editedPerson.address.city = this.form.address.city
+      editedPerson.address.country = this.form.address.country     
+      
+      this.people[editedPersonId] = editedPerson
     },
 
     editPerson(selectedPerson) {
@@ -160,7 +161,7 @@ export default {
       this.form.email = editedPerson.email
       this.form.address.city = editedPerson.address.city
       this.form.address.country = editedPerson.address.country
-      this.updatePerson()
+      // this.updatePerson()
 
       console.log(selectedPerson)
     },
