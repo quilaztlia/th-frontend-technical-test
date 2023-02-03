@@ -60,7 +60,7 @@
 
   <div v-if="showAddNewPersonForm">
     <h2>Add New Person</h2>
-    <form v-on:submit.prevent="addPerson(person)">
+    <form v-on:submit.prevent="">
       <div class="form-group">
         <label for="firstname">First Name: </label>
         <input type="text" name="firstname" placeholder="Enter First Name" v-model="form.firstname">
@@ -99,15 +99,16 @@ export default {
   },
 
   setup() {
-    const newPerson = ref({
-      firstname: '',
-      lastname: '',
-      email: '',
-      address: {
-        city: '',
-        country: ''
-      }
-    });
+    // let newPerson = ref({
+    //   id: '',
+    //   firstname: '',
+    //   lastname: '',
+    //   email: '',
+    //   address: {
+    //     city: '',
+    //     country: ''
+    //   }
+    // });
     const form = ref({
       firstname: '',
       lastname: '',
@@ -117,14 +118,16 @@ export default {
         country: ''
       }
     });
-    return { newPerson, form }
+    return {
+      // newPerson, 
+      form }
   },
 
   mounted() {
     this.getPeople()
     this.setTableHeaders()
   },
-  
+
   data() {
     return {
       showEditPersonForm: false,
@@ -151,27 +154,37 @@ export default {
     showNewPersonForm(){
       this.showEditPersonForm = false
       this.showAddNewPersonForm = true
+
       this.form.firstname= '',
       this.form.lastname= '',
       this.form.email= '',
       this.form.address.city =''
       this.form.address.country= ''
     },
-
-    addPerson(person) {
+    addPerson() {
       console.log('addPerson: form')
-      console.log(person)
-      // this.newPerson.id = this.form.id 
-      // this.newPerson.firstname = this.form.firstname
-      // this.newPerson.lastname = this.form.lastname
-      // this.newPerson.email = this.form.email
-      // this.newPerson.address.city = this.form.address.city
-      // this.newPerson.address.country = this.form.address.country
+      console.log(this.form)
+      let newPerson = {
+      id: '',
+      firstname: '',
+      lastname: '',
+      email: '',
+      address: {
+        city: '',
+        country: ''
+      }
+    };
+      //newPerson = this.newPerson
+      newPerson.id = this.people.length + 1 
+      newPerson.firstname = this.form.firstname
+      // newPersona.value.lastname = this.form.lastname
+      // newPersona.value.email = this.form.email
+      // newPersona.value.address.city = this.form.address.city
+      // newPersona.value.address.country = this.form.address.country
 
-      // this.people.join(this.newPerson)
-      console.log('addPerson: form')
-      console.log(this.newPerson)
-    },
+      this.people = this.people.concat(newPerson)
+      console.log(this.people)
+    },    
     cancelAddPerson() {
       this.showAddNewPersonForm = false
     },
