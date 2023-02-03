@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"
 import PeopleTable from '../views/PeopleTable'
-import EditPerson from '../views/EditPerson'
 import AddPerson from '../views/AddPerson'
+import EditPerson from '../views/EditPerson'
 import NotFound from '../views/NotFound'
 
 const router = createRouter({
@@ -9,18 +9,18 @@ const router = createRouter({
     routes: [
          {
             path: '/',
-            name: PeopleTable,
+            name: 'PeopleTable',
             component: PeopleTable
-        },
-        {
-            path: '/edit-person',
-            name: EditPerson,
-            component: EditPerson
-        },
+        },       
         {
             path: '/add-person',
-            name: AddPerson,
-            component: AddPerson  
+            name: 'AddPerson',
+            component: () => AddPerson  
+        },
+        {
+            path: '/edit-person/:idPerson',
+            name: 'EditPerson',
+            component: () => EditPerson  
         },
         {
             path: '/:catchAll(.*)',

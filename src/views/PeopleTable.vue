@@ -1,8 +1,7 @@
 <template>
   <div>
-    <button type="submit" @click="showNewPersonForm()">Add Person</button>
+    <button type="submit" @click="showNewPersonForm()">Add Person Here</button>
   </div>
-
   <div class="table">
     <table id="tableComponent">
       <thead>
@@ -20,8 +19,11 @@
           <td> {{ person.email }} </td>
           <td> {{ person.address.city }}</td>
           <td> {{ person.address.country }} </td>
-          <td><a href="#" @click="editPerson(person)">Edit</a> </td>
-          <td><a href="#" class="btn btn-danger" @click="deletePerson(person.id)">Delete</a></td>
+          <td><a href="#" @click="editPerson(person)">Edit  |</a> </td>
+          <td><a href="#" class="btn btn-danger" @click="deletePerson(person.id)">Delete  |</a></td>
+          <td>
+            <router-link :to="{ name: 'EditPerson', params: {  idPerson: person.id}  }">Go to Edit |</router-link> 
+          </td>
         </tr>
       </tbody>
     </table>
@@ -32,11 +34,11 @@
     <form v-on:submit.prevent="updatePerson(person)">
       <div class="form-group">
         <label for="firstname">First Name: </label>
-        <input type="text" name="firstname" placeholder="Enter First Name" v-model="form.firstname">
+        <input type="text" name="firstname" placeholder="First Name" v-model="form.firstname">
       </div>
       <div class="form-group">
         <label for="lastname">Last Name: </label>
-        <input type="text" name="lastname" placeholder="Enter Last Name" v-model="form.lastname">
+        <input type="text" name="lastname" placeholder="Last Name" v-model="form.lastname">
       </div>
       <div class="form-group">
         <label for="email">Email: </label>
@@ -62,11 +64,11 @@
     <form v-on:submit.prevent="">
       <div class="form-group">
         <label for="firstname">First Name: </label>
-        <input type="text" name="firstname" placeholder="Enter First Name" v-model="form.firstname">
+        <input type="text" name="firstname" placeholder="First Name" v-model="form.firstname">
       </div>
       <div class="form-group">
         <label for="lastname">Last Name: </label>
-        <input type="text" name="lastname" placeholder="Enter Last Name" v-model="form.lastname">
+        <input type="text" name="lastname" placeholder="Last Name" v-model="form.lastname">
       </div>
       <div class="form-group">
         <label for="email">Email: </label>
@@ -174,7 +176,7 @@ export default {
       this.showAddNewPersonForm = false
     },
 
-    updatePerson() {      
+    updatePerson() {
       let personId = this.form.id
       let editedPersonId = this.people.indexOf(p => p.id == personId)
       let editedPerson = this.people.filter(p => p.id == personId)[0]

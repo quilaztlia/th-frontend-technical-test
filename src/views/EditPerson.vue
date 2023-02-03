@@ -1,11 +1,3 @@
 <template>
-    <div>
-      <button type="submit">Add Person</button>
-    </div>
+  <h2>Edit Person</h2>
 </template>
-
-<!-- <script>
-export default {
-  name: 'EditPerson'
-}
-</script> -->

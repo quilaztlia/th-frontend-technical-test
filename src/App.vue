@@ -1,21 +1,18 @@
 <template>
   <div>
-    <p> <router-link to="/">Table</router-link> </p>
-    <p><router-link to="edit-person">Edit Person</router-link></p>
-    <router-link to="add-person">Add Person</router-link>
+    Go to:           
+    <router-link :to="{ name: 'PeopleTable'}">Table</router-link> |
+    <router-link :to="{ name: 'AddPerson' }">Add Person</router-link>  |
   </div>
 
   <router-view></router-view>
 </template>
 
 <script>
- //import PeopleTable from './views/PeopleTable.vue'
-
+ 
  export default {
    name: 'App',
-  //  components: {
-  //    PeopleTable
-  // }
+
  }
 </script> 
 
