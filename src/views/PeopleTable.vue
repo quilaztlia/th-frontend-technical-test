@@ -22,7 +22,11 @@
           <td><a href="#" @click="editPerson(person)">Edit  |</a> </td>
           <td><a href="#" class="btn btn-danger" @click="deletePerson(person.id)">Delete  |</a></td>
           <td>
-            <router-link :to="{ name: 'EditPerson', params: {  idPerson: person.id}  }">Go to Edit |</router-link> 
+            <router-link :to="{
+               name: 'EditPerson', 
+               params: {  idPerson: person.id},
+               query: { firstname: person.firstname, lastname: person.lastname } 
+           }">Go to Edit |</router-link> 
           </td>
         </tr>
       </tbody>
@@ -88,6 +92,8 @@
       </div>
     </form>
   </div>
+
+  <router-view />
 </template>
 
 <script>

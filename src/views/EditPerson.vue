@@ -1,4 +1,10 @@
 <template>
+ <div>
+   Test only propose
+    <p>IdPersom FROM ROuter {{ $route.params.idPerson }}</p>
+    <p>IdPersom FROM PROPS {{ idPerson }}</p>
+  <p>{{ idPerson }}  {{ firstname }}</p>
+</div> 
   <div v-if="showEditPersonForm">
     <h2>Edit Person</h2>
     <form v-on:submit.prevent="updatePerson(person)">
@@ -20,7 +26,7 @@
       </div>
       <div class="form-group">
         <label for="addresse.country">Address.Country: </label>
-        <input type="text" name="address.country" placeholder="Address.Country" v-model="form.address.country">
+        <input type="text" name="address.country" placeholder="Address.Country" v-model="form.address.country">      
       </div>
       <div>
         <button v-if="showEditPersonForm" type="submit" @click="updatePerson()">Update</button>
@@ -35,8 +41,9 @@ import { ref } from 'vue'
 
 export default {
   name: 'EditPerson',
-  props: {
-    idPerson: Number
+  props: [ 'idPerson'],
+  computed: {
+    firstname(){return this.$route.query.firstname}
   },
 
   setup() {

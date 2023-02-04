@@ -1,11 +1,11 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <div>
-  Go to:  
-  <router-link :to="{ name: 'PeopleTable' }">People Table  |</router-link>   
-   <router-link :to="{ name: 'AddPerson' }">Add Person |</router-link>  
-  <router-view :key="$route.fullPath"  />
-</div>
+    Go to:
+    <router-link :to="{ name: 'PeopleTable' }">People Table |</router-link>
+    <router-link :to="{ name: 'AddPerson' }">Add Person |</router-link>
+    <router-view :key="$route.fullPath" />
+  </div>
 </template>
 
 <script>
