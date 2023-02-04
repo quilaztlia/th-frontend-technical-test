@@ -1,19 +1,19 @@
 <template>
+  <img alt="Vue logo" src="./assets/logo.png">
   <div>
-    Go to:           
-    <router-link :to="{ name: 'PeopleTable'}">Table</router-link> |
-    <router-link :to="{ name: 'AddPerson' }">Add Person</router-link>  |
-  </div>
-
-  <router-view></router-view>
+  Go to:  
+  <router-link :to="{ name: 'PeopleTable' }">People Table  |</router-link>   
+   <router-link :to="{ name: 'AddPerson' }">Add Person |</router-link>  
+  <router-view :key="$route.fullPath"  />
+</div>
 </template>
 
 <script>
- 
- export default {
-   name: 'App',
-
- }
+export default {
+  name: 'App',
+  components: {
+  }
+}
 </script> 
 
 <style>

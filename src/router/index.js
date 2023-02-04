@@ -1,26 +1,28 @@
 import { createRouter, createWebHistory } from "vue-router"
-import PeopleTable from '../views/PeopleTable'
-import AddPerson from '../views/AddPerson'
-import EditPerson from '../views/EditPerson'
-import NotFound from '../views/NotFound'
+ import NotFound from '../views/NotFound'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
          {
             path: '/',
+            name: 'HomePage',
+            component: () => import('../views/HomePage')
+        },  
+        {
+            path: '/table',
             name: 'PeopleTable',
-            component: PeopleTable
-        },       
+            component: () =>  import('../views/PeopleTable')
+        },         
         {
             path: '/add-person',
             name: 'AddPerson',
-            component: () => AddPerson  
+            component: () => import('../views/AddPerson')
         },
         {
             path: '/edit-person/:idPerson',
             name: 'EditPerson',
-            component: () => EditPerson  
+            component: () => import('../views/EditPerson')
         },
         {
             path: '/:catchAll(.*)',
