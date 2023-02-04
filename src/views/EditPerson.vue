@@ -7,7 +7,11 @@
 </div> 
   <div v-if="showEditPersonForm">
     <h2>Edit Person</h2>
-    <form v-on:submit.prevent="updatePerson(person)">
+    <!-- <form > -->
+      <div class="form-group">
+        <label for="Id">Id: </label>
+        <input type="text" name="id" placeholder="Id" v-model="form.id">
+      </div>
       <div class="form-group">
         <label for="firstname">First Name: </label>
         <input type="text" name="firstname" placeholder="First Name" v-model="form.firstname">
@@ -32,7 +36,7 @@
         <button v-if="showEditPersonForm" type="submit" @click="updatePerson()">Update</button>
         <button v-if="showEditPersonForm" type="submit" @click="cancelUpdatePerson()">Cancel</button>
       </div>
-    </form>
+    <!-- </form> -->
   </div>
 </template>
 
@@ -48,6 +52,7 @@ export default {
 
   setup() {
     const form = ref({
+      id: '',
       firstname: '',
       lastname: '',
       email: '',
@@ -69,7 +74,7 @@ export default {
 
   methods: {
     updatePerson() {
-      let personId = this.form.id
+      let personId = this.idPerson  //this.form.id
       let editedPersonId = this.people.indexOf(p => p.id == personId)
       let editedPerson = this.people.filter(p => p.id == personId)[0]
 

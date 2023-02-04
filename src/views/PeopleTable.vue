@@ -92,8 +92,8 @@
       </div>
     </form>
   </div>
-
-  <router-view />
+<!-- Show component bur reload the vue => LOST dataTable
+  <router-view /> -->
 </template>
 
 <script>
