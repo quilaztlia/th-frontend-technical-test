@@ -34,7 +34,7 @@
 import { ref } from 'vue'
 
 export default {
- // name: 'AddPerson',
+  name: 'AddPerson',
 
   setup() {
     const form = ref({

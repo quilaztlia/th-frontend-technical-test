@@ -7,27 +7,28 @@ const router = createRouter({
          {
             path: '/',
             name: 'HomePage',
-            component: () => import('../views/HomePage')
-        },  
-        {
-            path: '/table',
-            name: 'PeopleTable',
-            component: () =>  import('../views/PeopleTable'),
+            component: () => import('../views/HomePage'),
             children: [
-               //  reload Page! so we LOST table data
                 {
-                    path: '/edit-person/:idPerson',
-                    name: 'EditPerson',
-                    component: () => import('../components/EditPerson'),
-                    props: true
+                    path: '/table',
+                    name: 'PeopleTable',
+                    component: () =>  import('../components/PeopleTable'),
+                   
                 },
-                {
-                    path: '/add-person',
-                    name: 'AddPerson',
-                    component: () => import('../components/AddPerson')
-                },
-            ]
-        },         
+                //  reload Page! so we LOST table data
+                 {
+                     path: '/edit-person/:idPerson',
+                     name: 'EditPerson',
+                     component: () => import('../components/EditPerson'),
+                     props: true
+                 },
+                 {
+                     path: '/add-person',
+                     name: 'AddPerson',
+                     component: () => import('../components/AddPerson')
+                 },
+             ]
+        },                   
         // {
         //     path: '/edit-person/:idPerson',
         //     name: 'EditPerson',

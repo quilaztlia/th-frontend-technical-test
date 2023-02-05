@@ -1,8 +1,4 @@
 <template>
-  <div>
-    <button type="submit" @click="showNewPersonForm()">Add Person Here</button>
-  </div>
-
   <div class="table">
     <table id="tableComponent">
       <thead>
@@ -20,60 +16,46 @@
           <td> {{ person.email }} </td>
           <td> {{ person.address.city }}</td>
           <td> {{ person.address.country }} </td>
-          <td><a href="#" @click="editPerson(person)">Edit  |</a> </td>
-          <td><a href="#" class="btn btn-danger" @click="deletePerson(person.id)">Delete  |</a></td>
-          <td>
-            <router-link :to="{
+          <!-- <td><a href="#" @click="editPerson(person)">Edit  |</a> </td> -->
+          <td> <router-link :to="{
                name: 'EditPerson', 
                params: {  idPerson: person.id},
                query: { firstname: person.firstname, lastname: person.lastname } 
-           }">Go to Edit |</router-link> 
+           }">Edit |</router-link> 
           </td>
+          <td><a href="#" class="btn btn-danger" @click="deletePerson(person.id)">Delete  |</a></td>
+          
         </tr>
       </tbody>
     </table>
   </div>
-
-  <div v-if="showEditPersonForm">
-   <EditPerson/>
-  </div>
-    
-  <div v-if="showAddNewPersonForm">
-    <AddPerson/>
-  </div>
-
-<!-- Show component bur reload the vue => LOST dataTable  -->
-  <router-view />
 </template>
 
 
 <script>
-import { ref } from 'vue'
-import { AddPerson} from '../components/AddPerson.vue'
-
 export default {
   name: 'PeopleTable',
   components: {
-    AddPerson
+  //  AddPerson
   },
 
   setup() {
-    let peopleCounter = 10;
-    const form = ref({
-      firstname: '',
-      lastname: '',
-      email: '',
-      address: {
-        city: '',
-        country: ''
-      }
-    });
-    return { form, peopleCounter }
+    //let peopleCounter = 10;
+    // const form = ref({
+    //   firstname: '',
+    //   lastname: '',
+    //   email: '',
+    //   address: {
+    //     city: '',
+    //     country: ''
+    //   }
+    // });
+    // return { form, peopleCounter }
   },
 
   mounted() {
-    this.getPeople()
-    this.setTableHeaders()
+    // this.getPeople()
+     // this.setTableHeaders()
   },
 
   data() {
