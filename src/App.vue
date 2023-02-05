@@ -23,9 +23,7 @@ export default {
   },
 
   data() {
-    return {
-      //people: []
-    }
+    return { }
   },
 
   methods: {
@@ -36,7 +34,7 @@ export default {
           this.$store.state.people = data.data
         })
         .catch(error => {
-          console.error('Panic at Backedn', error)
+          console.error('Panic at Backend', error)
         })        
     }
   }

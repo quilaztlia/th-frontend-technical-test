@@ -8,12 +8,13 @@ import PeopleTable from './components/PeopleTable'
 
 const store = createStore({
     state() {
-        return {
-            counter: 0,
-            people: []
+        return {            
+            people: [],
+            peopleTotal: 10
         }
     }
 })
+
 const app = createApp(App)
 
 app.use(store)

@@ -1,16 +1,13 @@
 <template>
  <div>
-   Test only propose
+   <!-- Test only propose -->
     <p>IdPersom FROM ROuter {{ $route.params.idPerson }}</p>
-    <p>IdPersom FROM PROPS {{ idPerson }}</p>
-  <p>{{ idPerson }}  {{ firstname }}</p>
-    
-  {{ $store.state.people[idPerson-1] }}
-  
+    <p>IdPersom FROM PROPS {{ idPerson }}</p>  
+  <!-- {{ $store.state.people[idPerson-1] }} -->
 </div> 
-  <div v-if="showEditPersonForm">
+  <!-- <div v-if="showEditPersonForm"> -->
     <h2>Edit Person</h2>
-    <!-- <form > -->
+    <form >
       <div class="form-group">
         <label for="Id">Id: </label>
         <input type="text" name="id" placeholder="Id" v-model="form.id">
@@ -39,8 +36,8 @@
         <button v-if="showEditPersonForm" type="submit" @click="updatePerson()">Update</button>
         <button v-if="showEditPersonForm" type="submit" @click="cancelUpdatePerson()">Cancel</button>
       </div>
-    <!-- </form> -->
-  </div>
+    </form>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -49,9 +46,9 @@ import { ref } from 'vue'
 export default {
   name: 'EditPerson',
   props: [ 'idPerson'],
-  computed: {
-    firstname(){return this.$route.query.firstname}
-  },
+  // computed: {
+  //   firstname(){return this.$route.query.firstname}
+  // },
 
   setup() {
     const form = ref({
@@ -67,19 +64,21 @@ export default {
     return { form }
   },
 
-  mounted() { },
+  // mounted() { },
 
   data() {
     return {
-      showEditPersonForm: true
+      // showEditPersonForm: true
     }
   },
 
   methods: {
     updatePerson() {
-      let personId = this.idPerson  //this.form.id
-      let editedPersonId = this.people.indexOf(p => p.id == personId)
-      let editedPerson = this.people.filter(p => p.id == personId)[0]
+      //$store.state.people[idPerson-1]
+      console.log('UpdagePerson(): idPerson', this.idPerson)
+      //let personId = this.idPerson  
+      let editedPersonId = this.$store.state.people.indexOf(p => p.id == this.idPerson)
+      let editedPerson = this.$store.state.people.filter(p => p.id == this.idPerson)[0]
 
       editedPerson.firstname = this.form.firstname
       editedPerson.lastname = this.form.lastname
@@ -99,7 +98,7 @@ export default {
       this.showEditPersonForm = true
       this.showAddNewPersonForm = false
 
-      let editedPerson = this.people.filter(p => p.id == selectedPerson.id)[0]
+      let editedPerson = this.$store.statepeople.filter(p => p.id == selectedPerson.id)[0]
 
       this.form.id = editedPerson.id
       this.form.firstname = editedPerson.firstname

@@ -14,8 +14,7 @@ const router = createRouter({
                     name: 'PeopleTable',
                     component: () =>  import('../components/PeopleTable'),
                    
-                },
-                //  reload Page! so we LOST table data
+                },                
                  {
                      path: '/edit-person/:idPerson',
                      name: 'EditPerson',
@@ -28,18 +27,7 @@ const router = createRouter({
                      component: () => import('../components/AddPerson')
                  },
              ]
-        },                   
-        // {
-        //     path: '/edit-person/:idPerson',
-        //     name: 'EditPerson',
-        //     component: () => import('../components/EditPerson'),
-        //     props: true
-        // },
-        // {
-        //     path: '/add-person',
-        //     name: 'AddPerson',
-        //     component: () => import('../components/AddPerson')
-        // },
+        },        
         {
             path: '/:catchAll(.*)',
             name: 'NotFound',

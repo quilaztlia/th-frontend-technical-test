@@ -1,5 +1,4 @@
 <template>
-  <!-- <div v-if="showAddNewPersonForm"> -->
     <h2>Add New Person</h2>
     <form v-on:submit.prevent="">
       <div class="form-group">
@@ -26,8 +25,7 @@
         <button v-if="showAddNewPersonForm" type="submit" @click="addPerson(person)">Add</button>
         <button v-if="showAddNewPersonForm" type="submit" @click="cancelAddPerson()">Cancel</button>
       </div>
-    </form>
-  <!-- </div> -->
+    </form>  
 </template>
 
 <script>
@@ -80,14 +78,15 @@ export default {
       this.people = this.people.concat(newPerson)
     },
 
-    cancelAddPerson() {
-      //this.showAddNewPersonForm = false
-      //TODO clean
+    cancelAddPerson() {            
       this.form.firstname = ''
       this.form.lastname = ''
       this.form.email = ''
       this.form.address.city = ''
       this.form.address.country = ''
+
+      //this.$store.showAddNewPersonForm = false
+      //this.$store.peopleTotal++
     }
   }
 }

@@ -7,27 +7,21 @@
     <PeopleTable />
   </div>
 
-  <div v-if="showEditPersonForm">
+  <div id="editPersonPanel" v-if="showEditPersonForm">
     <EditPerson />
   </div>
 
-  <div v-if="showAddNewPersonForm">
+  <div id="addPersonPanel" v-if="showAddNewPersonForm">
     <AddPerson />
   </div>
 
-  <router-view />
+  <router-view />  
 </template>
 
 <script>
-//import { ref } from 'vue'
-import { AddPerson } from '../components/AddPerson.vue'
-import { EditPerson } from '../components/EditPerson.vue'
 export default {
   name: 'HomePage',
-  components: {
-    AddPerson,
-    EditPerson
-  },
+  components: { },
 
   setup() {
     // let peopleCounter = 10;
@@ -40,30 +34,21 @@ export default {
     //     country: ''
     //   }
     // });
-    // return { form, peopleCounter }
+    // return { form }
   },
 
-  mounted() {
-    // this.getPeople()
-    // this.setTableHeaders()
-  },
+  mounted() { },
 
   data() {
     return {
       showEditPersonForm: false,
-      showAddNewPersonForm: false,
-      people: [],
-      //headers: [],
+      showAddNewPersonForm: false,         
     }
   },
 
   methods: {
     // getPeople() {
     //   this.people = this.$store.state.people
-    // },
-
-    // setTableHeaders() {
-    //   this.headers = ['Id', 'FirstName', 'LastName', 'Email', 'Address.City', 'Address.Country']
     // },
 
     // showNewPersonForm() {
@@ -75,7 +60,7 @@ export default {
     //     this.form.email = '',
     //     this.form.address.city = ''
     //   this.form.address.country = ''
-    // },
+    // },    
     // addPerson() {
     //   let newPerson = {
     //     id: '',
@@ -98,10 +83,10 @@ export default {
     //   //this.people = this.people.concat(newPerson)
     //  this.$store.state.people.concat(newPerson)
     // },
-
     // cancelAddPerson() {
     //   this.showAddNewPersonForm = false
     // },
+
 
     // updatePerson() {
     //   let personId = this.form.id
@@ -117,7 +102,6 @@ export default {
     //   this.people[editedPersonId] = editedPerson
     //   this.showEditPersonForm = false
     // },
-
     // cancelUpdatePerson() {
     //   this.showEditPersonForm = false
     // },
@@ -136,6 +120,7 @@ export default {
     //   this.form.address.country = editedPerson.address.country
     // },
 
+
     // deletePerson(personToDeleteId) {
     //   this.showEditPersonForm = false
     //   this.showAddNewPersonForm = false
@@ -151,4 +136,3 @@ export default {
 <style scoped>
 
 </style>
-
