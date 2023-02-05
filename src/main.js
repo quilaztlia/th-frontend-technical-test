@@ -10,7 +10,7 @@ const store = createStore({
     state() {
         return {            
             people: [],
-            peopleTotal: 10
+            peopleCounter: 10
         }
     }
 })
