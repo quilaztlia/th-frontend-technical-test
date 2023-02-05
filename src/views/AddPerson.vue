@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showAddNewPersonForm">
+  <!-- <div v-if="showAddNewPersonForm"> -->
     <h2>Add New Person</h2>
     <form v-on:submit.prevent="">
       <div class="form-group">
@@ -27,14 +27,14 @@
         <button v-if="showAddNewPersonForm" type="submit" @click="cancelAddPerson()">Cancel</button>
       </div>
     </form>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
 import { ref } from 'vue'
 
 export default {
-  name: 'AddPerson',
+ // name: 'AddPerson',
 
   setup() {
     const form = ref({
@@ -49,7 +49,7 @@ export default {
     return { form }
   },
 
-  mounted() { },
+  //mounted() { },
 
   data() {
     return {

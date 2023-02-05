@@ -4,6 +4,11 @@
     <p>IdPersom FROM ROuter {{ $route.params.idPerson }}</p>
     <p>IdPersom FROM PROPS {{ idPerson }}</p>
   <p>{{ idPerson }}  {{ firstname }}</p>
+    
+  {{ $store.state.people }}
+   {{ $store.state.counter }}
+   
+   
 </div> 
   <div v-if="showEditPersonForm">
     <h2>Edit Person</h2>

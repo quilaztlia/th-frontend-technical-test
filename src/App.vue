@@ -1,6 +1,5 @@
 <template>
-   {{ $store.state.people }}
-   {{ $store.state.counter }}
+  
   <img alt="Vue logo" src="./assets/logo.png">
   <div>
     Go to:

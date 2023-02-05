@@ -2,6 +2,7 @@
   <div>
     <button type="submit" @click="showNewPersonForm()">Add Person Here</button>
   </div>
+
   <div class="table">
     <table id="tableComponent">
       <thead>
@@ -12,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="person in people" :key='person.id'>
+        <tr v-for="person in this.$store.state.people" :key='person.id'>
           <td> {{ person.id }} </td>
           <td> {{ person.firstname }}</td>
           <td> {{ person.lastname }} </td>
@@ -34,73 +35,27 @@
   </div>
 
   <div v-if="showEditPersonForm">
-    <h2>Edit Person</h2>
-    <form v-on:submit.prevent="updatePerson(person)">
-      <div class="form-group">
-        <label for="firstname">First Name: </label>
-        <input type="text" name="firstname" placeholder="First Name" v-model="form.firstname">
-      </div>
-      <div class="form-group">
-        <label for="lastname">Last Name: </label>
-        <input type="text" name="lastname" placeholder="Last Name" v-model="form.lastname">
-      </div>
-      <div class="form-group">
-        <label for="email">Email: </label>
-        <input type="text" name="email" placeholder="Email" v-model="form.email">
-      </div>
-      <div class="form-group">
-        <label for="addresse.city">Address.City: </label>
-        <input type="text" name="address.city" placeholder="Address.City" v-model="form.address.city">
-      </div>
-      <div class="form-group">
-        <label for="addresse.country">Address.Country: </label>
-        <input type="text" name="address.country" placeholder="Address.Country" v-model="form.address.country">
-      </div>
-      <div>
-        <button v-if="showEditPersonForm" type="submit" @click="updatePerson()">Update</button>
-        <button v-if="showEditPersonForm" type="submit" @click="cancelUpdatePerson()">Cancel</button>
-      </div>
-    </form>
+   <EditPerson/>
+  </div>
+    
+  <div v-if="showAddNewPersonForm">
+    <AddPerson/>
   </div>
 
-  <div v-if="showAddNewPersonForm">
-    <h2>Add New Person</h2>
-    <form v-on:submit.prevent="">
-      <div class="form-group">
-        <label for="firstname">First Name: </label>
-        <input type="text" name="firstname" placeholder="First Name" v-model="form.firstname">
-      </div>
-      <div class="form-group">
-        <label for="lastname">Last Name: </label>
-        <input type="text" name="lastname" placeholder="Last Name" v-model="form.lastname">
-      </div>
-      <div class="form-group">
-        <label for="email">Email: </label>
-        <input type="text" name="email" placeholder="Email" v-model="form.email">
-      </div>
-      <div class="form-group">
-        <label for="addresse.city">Address.City: </label>
-        <input type="text" name="address.city" placeholder="Address.City" v-model="form.address.city">
-      </div>
-      <div class="form-group">
-        <label for="addresse.country">Address.Country: </label>
-        <input type="text" name="address.country" placeholder="Address.Country" v-model="form.address.country">
-      </div>
-      <div>
-        <button v-if="showAddNewPersonForm" type="submit" @click="addPerson(person)">Add</button>
-        <button v-if="showAddNewPersonForm" type="submit" @click="cancelAddPerson()">Cancel</button>
-      </div>
-    </form>
-  </div>
-<!-- Show component bur reload the vue => LOST dataTable
-  <router-view /> -->
+<!-- Show component bur reload the vue => LOST dataTable  -->
+  <router-view />
 </template>
+
 
 <script>
 import { ref } from 'vue'
+import { AddPerson} from './AddPerson.vue'
 
 export default {
   name: 'PeopleTable',
+  components: {
+    AddPerson
+  },
 
   setup() {
     let peopleCounter = 10;
@@ -132,12 +87,7 @@ export default {
 
   methods: {
     getPeople() {
-      fetch('https://fakerapi.it/api/v1/persons?_locale=fr')
-        .then(response => response.json())
-        .then(data => { this.people = data.data })
-        .catch(error => {
-          console.error('Panic at Backedn', error)
-        })
+      this.people = this.$store.state.people
     },
 
     setTableHeaders() {
@@ -173,7 +123,8 @@ export default {
       newPerson.address.city = this.form.address.city
       newPerson.address.country = this.form.address.country
 
-      this.people = this.people.concat(newPerson)
+      //this.people = this.people.concat(newPerson)
+     this.$store.state.people.concat(newPerson)
     },
     cancelAddPerson() {
       this.showAddNewPersonForm = false
