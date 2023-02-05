@@ -2,8 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { createStore } from 'vuex'
-import AddPerson from './views/AddPerson'
-import EditPerson from './views/EditPerson'
+import AddPerson from './components/AddPerson'
+import EditPerson from './components/EditPerson'
 
 const store = createStore({
     state() {

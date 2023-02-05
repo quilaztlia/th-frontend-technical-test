@@ -5,10 +5,8 @@
     <p>IdPersom FROM PROPS {{ idPerson }}</p>
   <p>{{ idPerson }}  {{ firstname }}</p>
     
-  {{ $store.state.people }}
-   {{ $store.state.counter }}
-   
-   
+  {{ $store.state.people[idPerson-1] }}
+  
 </div> 
   <div v-if="showEditPersonForm">
     <h2>Edit Person</h2>

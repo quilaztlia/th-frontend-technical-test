@@ -14,31 +14,31 @@ const router = createRouter({
             name: 'PeopleTable',
             component: () =>  import('../views/PeopleTable'),
             children: [
-                // reload Page! so we LOST table data
-                // {
-                //     path: '/edit-person/:idPerson',
-                //     name: 'EditPerson',
-                //     component: () => import('../views/EditPerson'),
-                //     props: true
-                // },
-                // {
-                //     path: '/add-person',
-                //     name: 'AddPerson',
-                //     component: () => import('../views/AddPerson')
-                // },
+               //  reload Page! so we LOST table data
+                {
+                    path: '/edit-person/:idPerson',
+                    name: 'EditPerson',
+                    component: () => import('../components/EditPerson'),
+                    props: true
+                },
+                {
+                    path: '/add-person',
+                    name: 'AddPerson',
+                    component: () => import('../components/AddPerson')
+                },
             ]
         },         
-        {
-            path: '/edit-person/:idPerson',
-            name: 'EditPerson',
-            component: () => import('../views/EditPerson'),
-            props: true
-        },
-        {
-            path: '/add-person',
-            name: 'AddPerson',
-            component: () => import('../views/AddPerson')
-        },
+        // {
+        //     path: '/edit-person/:idPerson',
+        //     name: 'EditPerson',
+        //     component: () => import('../components/EditPerson'),
+        //     props: true
+        // },
+        // {
+        //     path: '/add-person',
+        //     name: 'AddPerson',
+        //     component: () => import('../components/AddPerson')
+        // },
         {
             path: '/:catchAll(.*)',
             name: 'NotFound',

@@ -49,7 +49,7 @@
 
 <script>
 import { ref } from 'vue'
-import { AddPerson} from './AddPerson.vue'
+import { AddPerson} from '../components/AddPerson.vue'
 
 export default {
   name: 'PeopleTable',
