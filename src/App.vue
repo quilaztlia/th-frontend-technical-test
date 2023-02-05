@@ -9,13 +9,23 @@
 </template>
 
 <script>
+//import { ref } from 'vue'
 export default {
   name: 'App',
   components: {
   },
 
   setup() {
-    return { }
+    // const form = ref({
+    //   firstname: '',
+    //   lastname: '',
+    //   email: '',
+    //   address: {
+    //     city: '',
+    //     country: ''
+    //   }
+    // });
+    // return { form}
   },
 
   mounted() {
@@ -30,8 +40,9 @@ export default {
     getPeople() {            
       fetch('https://fakerapi.it/api/v1/persons?_locale=fr')
         .then(response => response.json())
-        .then(data => {           
-          this.$store.state.people = data.data
+        .then(data => {  
+          this.people = data.data         
+          this.$store.state.people = this.people
         })
         .catch(error => {
           console.error('Panic at Backend', error)

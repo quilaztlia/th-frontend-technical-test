@@ -19,7 +19,7 @@
           <!-- <td><a href="#" @click="editPerson(person)">Edit  |</a> </td> -->
           <td> <router-link :to="{
                name: 'EditPerson', 
-               params: {  idPerson: person.id},
+               params: { editedPersonId: person.id},
                query: { firstname: person.firstname, lastname: person.lastname } 
            }">Edit |</router-link> 
           </td>
@@ -60,14 +60,16 @@ export default {
 
   data() {
     return {
-      showEditPersonForm: false,
-      showAddNewPersonForm: false,
+      // showEditPersonForm: false,
+      // showAddNewPersonForm: false,
       people: [],
       headers: [],
     }
   },
 
   methods: {
+    
+
     getPeople() {
       this.people = this.$store.state.people
     },
@@ -77,8 +79,8 @@ export default {
     },
 
     showNewPersonForm() {
-      this.showEditPersonForm = false
-      this.showAddNewPersonForm = true
+      // this.showEditPersonForm = false
+      // this.showAddNewPersonForm = true
 
       this.form.firstname = '',
         this.form.lastname = '',
@@ -114,7 +116,7 @@ export default {
 
     updatePerson() {
       let personId = this.form.id
-      let editedPersonId = this.people.indexOf(p => p.id == personId)
+      this.store.state.editedPersonId = this.people.indexOf(p => p.id == personId)
       let editedPerson = this.people.filter(p => p.id == personId)[0]
 
       editedPerson.firstname = this.form.firstname
@@ -123,17 +125,17 @@ export default {
       editedPerson.address.city = this.form.address.city
       editedPerson.address.country = this.form.address.country
 
-      this.people[editedPersonId] = editedPerson
-      this.showEditPersonForm = false
+      // this.people[editedPersonId] = editedPerson
+      // this.showEditPersonForm = false
     },
 
     cancelUpdatePerson() {
-      this.showEditPersonForm = false
+      // this.showEditPersonForm = false
     },
 
     editPerson(selectedPerson) {
-      this.showEditPersonForm = true
-      this.showAddNewPersonForm = false
+      // this.showEditPersonForm = true
+      // this.showAddNewPersonForm = false
 
       let editedPerson = this.people.filter(p => p.id == selectedPerson.id)[0]
 
@@ -146,10 +148,11 @@ export default {
     },
 
     deletePerson(personToDeleteId) {
-      this.showEditPersonForm = false
-      this.showAddNewPersonForm = false
+      // this.showEditPersonForm = false
+      // this.showAddNewPersonForm = false
+      this.$store.state.editedPersonId = personToDeleteId
 
-      this.people = this.people.filter(p => p.id != personToDeleteId)
+      this.$store.state.people = this.people.filter(p => p.id != personToDeleteId)
     }
   }
 }

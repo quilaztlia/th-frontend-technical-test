@@ -16,7 +16,7 @@ const router = createRouter({
                    
                 },                
                  {
-                     path: '/edit-person/:idPerson',
+                     path: '/edit-person/:editedPersonId',
                      name: 'EditPerson',
                      component: () => import('../components/EditPerson'),
                      props: true

@@ -10,7 +10,27 @@ const store = createStore({
     state() {
         return {            
             people: [],
-            peopleCounter: 10
+            peopleCounter: 10,
+            selectedPersonId: 0
+        }
+    },
+    getters:{
+        getPersonId(state){
+            return state.selectedPersonId
+        },
+        getPerson(state){
+            return state.people.filter(p => p.id == store.state.selectedPersonId)
+        },
+    },
+
+    mutations: {
+        setIdPerson(state, payload){
+            state.selectedPersonId = payload
+        },
+
+        updatePerson(state, payload){
+            //TODO
+            state.people = state.people + payload        
         }
     }
 })
