@@ -15,8 +15,7 @@
           <td> {{ person.lastname }} </td>
           <td> {{ person.email }} </td>
           <td> {{ person.address.city }}</td>
-          <td> {{ person.address.country }} </td>
-          <!-- <td><a href="#" @click="editPerson(person)">Edit  |</a> </td> -->
+          <td> {{ person.address.country }} </td>          
           <td> <router-link :to="{
                name: 'EditPerson', 
                params: { editedPersonId: person.id},
@@ -35,33 +34,14 @@
 <script>
 export default {
   name: 'PeopleTable',
-  components: {
-  //  AddPerson
-  },
+  components: { },
 
-  setup() {
-    //let peopleCounter = 10;
-    // const form = ref({
-    //   firstname: '',
-    //   lastname: '',
-    //   email: '',
-    //   address: {
-    //     city: '',
-    //     country: ''
-    //   }
-    // });
-    // return { form, peopleCounter }
-  },
+  setup() {  },
 
-  mounted() {
-    // this.getPeople()
-     // this.setTableHeaders()
-  },
+  mounted() { },
 
   data() {
     return {
-      // showEditPersonForm: false,
-      // showAddNewPersonForm: false,
       people: [],
       headers: [],
     }
@@ -69,64 +49,12 @@ export default {
 
   methods: {
     
-
     getPeople() {
       this.people = this.$store.state.people
     },
 
     setTableHeaders() {
       this.headers = ['Id', 'FirstName', 'LastName', 'Email', 'Address.City', 'Address.Country']
-    },
-
-    showNewPersonForm() {
-      // this.showEditPersonForm = false
-      // this.showAddNewPersonForm = true
-
-      this.form.firstname = '',
-        this.form.lastname = '',
-        this.form.email = '',
-        this.form.address.city = ''
-      this.form.address.country = ''
-    },
-    addPerson() {
-      let newPerson = {
-        id: '',
-        firstname: '',
-        lastname: '',
-        email: '',
-        address: {
-          city: '',
-          country: ''
-        }
-      };
-      this.peopleCounter = this.peopleCounter + 1
-      newPerson.id = this.peopleCounter
-      newPerson.firstname = this.form.firstname
-      newPerson.lastname = this.form.lastname
-      newPerson.email = this.form.email
-      newPerson.address.city = this.form.address.city
-      newPerson.address.country = this.form.address.country
-
-      //this.people = this.people.concat(newPerson)
-     this.$store.state.people.concat(newPerson)
-    },
-    cancelAddPerson() {
-      this.showAddNewPersonForm = false
-    },
-
-    updatePerson() {
-      let personId = this.form.id
-      this.store.state.editedPersonId = this.people.indexOf(p => p.id == personId)
-      let editedPerson = this.people.filter(p => p.id == personId)[0]
-
-      editedPerson.firstname = this.form.firstname
-      editedPerson.lastname = this.form.lastname
-      editedPerson.email = this.form.email
-      editedPerson.address.city = this.form.address.city
-      editedPerson.address.country = this.form.address.country
-
-      // this.people[editedPersonId] = editedPerson
-      // this.showEditPersonForm = false
     },
 
     cancelUpdatePerson() {
@@ -136,9 +64,7 @@ export default {
     editPerson(selectedPerson) {
       // this.showEditPersonForm = true
       // this.showAddNewPersonForm = false
-
       let editedPerson = this.people.filter(p => p.id == selectedPerson.id)[0]
-
       this.form.id = editedPerson.id
       this.form.firstname = editedPerson.firstname
       this.form.lastname = editedPerson.lastname
@@ -148,10 +74,7 @@ export default {
     },
 
     deletePerson(personToDeleteId) {
-      // this.showEditPersonForm = false
-      // this.showAddNewPersonForm = false
       this.$store.state.editedPersonId = personToDeleteId
-
       this.$store.state.people = this.people.filter(p => p.id != personToDeleteId)
     }
   }

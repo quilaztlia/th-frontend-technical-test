@@ -1,7 +1,5 @@
 <template>
   <h2>Edit Person</h2>
-  <!-- {{ $store.getters.getPerson }} -->
-  <!-- <form> -->
     <div class="form-group">
       <label for="firstname">First Name: </label>
       <input type="text" name="firstname" placeholder="First Name" v-model="form.firstname">
@@ -25,8 +23,7 @@
     <div>
       <button type="submit" @click="updatePerson()">Update</button>
       <button type="submit" @click="cancelUpdatePerson()">Cancel</button>
-    </div>
-  <!-- </form> -->
+    </div>  
 </template>
 
 <script>
@@ -47,18 +44,12 @@ export default {
         country: ''
       },     
     });
-    //const editedPerson = ref({ });
-    return { 
-      form, 
-      //editedPerson 
-    }
+    
+    return { form }
   },
 
   mounted() {    
     this.setIdPerson()
-    //console.log('mounted(): editedPersonId', this.editedPersonId)
-    // console.log('PersonId', this.$store.getters.getPersonId)
-    // console.log(this.$store.getters.getPerson)
     
     let editedPerson = this.$store.getters.getPerson[0]
 
@@ -82,31 +73,16 @@ export default {
       //this.$store.commit('updatePerson', 10)
     },
 
-    updatePerson() {
-      console.log(this.$store.state.people)
-      console.log('SelectPersonToUpdate(): editedPersonId', this.editedPersonId)
-      //let personId = this.idPerson  
-      
-      let personId = this.$store.state.people.indexOf(p => p.id == this.editedPersonId)
-      
-      //let editedPerson = this.$store.state.people.filter(p => p.id == this.editedPersonId)
-    
-      //let editedPerson = this.$store.state.people.filter(p => p.id == this.editedPersonId)[0]
-      
-      this.$store.state[personId] = this.form
-      console.log(this.form) 
-      // this.people[editedPersonId] = editedPerson    
-      // this.showEditPersonForm = false
+    updatePerson() {      
+      let personId = this.$store.state.people.indexOf(p => p.id == this.editedPersonId)      
+      this.$store.state[personId] = this.form      
     },
 
     cancelUpdatePerson() {
       //this.showEditPersonForm = false
     },
 
-    editPerson(selectedPerson) {
-      // this.showEditPersonForm = true
-      // this.showAddNewPersonForm = false
-
+    editPerson(selectedPerson) {      
       let editedPerson = this.$store.statepeople.filter(p => p.id == selectedPerson.id)[0]
 
       this.form.id = editedPerson.id

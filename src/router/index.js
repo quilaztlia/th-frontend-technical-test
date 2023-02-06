@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router"
- import NotFound from '../views/NotFound'
+import NotFound from '../views/NotFound'
 
 const router = createRouter({
     history: createWebHistory(),

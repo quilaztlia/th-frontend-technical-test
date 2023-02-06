@@ -9,24 +9,12 @@
 </template>
 
 <script>
-//import { ref } from 'vue'
 export default {
   name: 'App',
   components: {
   },
 
-  setup() {
-    // const form = ref({
-    //   firstname: '',
-    //   lastname: '',
-    //   email: '',
-    //   address: {
-    //     city: '',
-    //     country: ''
-    //   }
-    // });
-    // return { form}
-  },
+  setup() {  },
 
   mounted() {
     this.getPeople()

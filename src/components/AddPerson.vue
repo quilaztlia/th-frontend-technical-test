@@ -21,8 +21,7 @@
       <label for="addresse.country">Address.Country: </label>
       <input type="text" name="address.country" placeholder="Address.Country" v-model="form.address.country">
     </div>
-    <div>
-      <!-- v-if="" -->
+    <div>      
       <button  type="submit" @click="addPerson(person)">Add</button>
       <button type="submit" @click="cancelAddPerson()">Cancel</button>
     </div>
@@ -85,9 +84,7 @@ export default {
       if (this.validPerson) {
         this.$store.state.peopleCounter += 1
         this.$store.state.people = this.$store.state.people.concat(newPerson)
-      }
-
-      //console.log(this.$store.state.people)
+      }      
     },
 
     cancelAddPerson() {
@@ -97,11 +94,8 @@ export default {
       this.form.email = ''
       this.form.address.city = ''
       this.form.address.country = ''
-      // router.to(HomePage) 
-
-      //this.$store.showAddNewPersonForm = false
-      //Navigate to table ?
-      //this.$store.peopleTotal++
+      
+      // router.to(HomePage)       
     }
   }
 }
