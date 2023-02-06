@@ -3,7 +3,7 @@
     <table id="tableComponent">
       <thead>
         <tr>
-          <th v-for="field in headers" :key='field'>
+          <th v-for="field in this.headers" :key='field'>
             {{ field }} <i aria-label='Sort Icon'></i>
           </th>
         </tr>
@@ -38,7 +38,9 @@ export default {
 
   setup() {  },
 
-  mounted() { },
+  mounted() {
+    this.setTableHeaders()
+   },
 
   data() {
     return {
@@ -47,8 +49,7 @@ export default {
     }
   },
 
-  methods: {
-    
+  methods: {    
     getPeople() {
       this.people = this.$store.state.people
     },
@@ -57,25 +58,17 @@ export default {
       this.headers = ['Id', 'FirstName', 'LastName', 'Email', 'Address.City', 'Address.Country']
     },
 
-    cancelUpdatePerson() {
-      // this.showEditPersonForm = false
+    setIdPerson(editedPersonId){
+      this.$store.commit('setIdPerson', editedPersonId)    
+      console.log('this.editedPersonId' , editedPersonId)   
     },
 
-    editPerson(selectedPerson) {
-      // this.showEditPersonForm = true
-      // this.showAddNewPersonForm = false
-      let editedPerson = this.people.filter(p => p.id == selectedPerson.id)[0]
-      this.form.id = editedPerson.id
-      this.form.firstname = editedPerson.firstname
-      this.form.lastname = editedPerson.lastname
-      this.form.email = editedPerson.email
-      this.form.address.city = editedPerson.address.city
-      this.form.address.country = editedPerson.address.country
+    deleteStorePerson(editedPersonId){
+      this.$store.commit('deletePerson', editedPersonId)       
     },
-
-    deletePerson(personToDeleteId) {
-      this.$store.state.editedPersonId = personToDeleteId
-      this.$store.state.people = this.people.filter(p => p.id != personToDeleteId)
+    
+    deletePerson(personId) {      
+      this.deleteStorePerson(personId)
     }
   }
 }

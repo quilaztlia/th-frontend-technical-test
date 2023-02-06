@@ -68,6 +68,8 @@ export default {
           country: ''
         }
       };
+
+      //TODO: vuex:method
       this.peopleCounter = this.$store.state.peopleCounter
 
       newPerson.id = this.$store.state.peopleCounter + 1
@@ -94,8 +96,8 @@ export default {
       this.form.email = ''
       this.form.address.city = ''
       this.form.address.country = ''
-      
-      // router.to(HomePage)       
+        
+      this.$router.push('/')     
     }
   }
 }

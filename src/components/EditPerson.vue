@@ -79,7 +79,7 @@ export default {
     },
 
     cancelUpdatePerson() {
-      //this.showEditPersonForm = false
+      this.$router.push('/')    
     },
 
     editPerson(selectedPerson) {      

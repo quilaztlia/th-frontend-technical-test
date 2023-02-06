@@ -15,6 +15,9 @@ const store = createStore({
         }
     },
     getters:{
+        getPeopleCounter(state){
+            return state.peopleCounter
+        },
         getPersonId(state){
             return state.selectedPersonId
         },
@@ -28,9 +31,19 @@ const store = createStore({
             state.selectedPersonId = payload
         },
 
+        addPerson(state, payload){
+            state.people = this.$store.state.people.concat(payload)
+        },
+
         updatePerson(state, payload){
             //TODO
             state.people = state.people + payload        
+        },
+
+        deletePerson(state, idPerson){            
+            console.log('delete;', idPerson)
+            state.people = state.people.filter(p => p.id != idPerson)       
+            console.log(state.people)      
         }
     }
 })
