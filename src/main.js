@@ -22,7 +22,7 @@ const store = createStore({
             return state.selectedPersonId
         },
         getPerson(state){
-            return state.people.filter(p => p.id == store.state.selectedPersonId)
+            return state.people.filter(p => p.id == state.selectedPersonId)
         },
     },
 
@@ -35,15 +35,22 @@ const store = createStore({
             state.people = this.$store.state.people.concat(payload)
         },
 
-        updatePerson(state, payload){
+        updatePerson(state, updatedPerson){
             //TODO
-            state.people = state.people + payload        
+            // console.log('selectedId', state.selectedPersonId)
+            // console.log('updatedPerson.firstname', updatedPerson.firstname)
+        
+            state.people.filter(p => p.id == state.selectedPersonId)[0].firstname = updatedPerson.firstname
+            state.people.filter(p => p.id == state.selectedPersonId)[0].lastname = updatedPerson.lastname
+            state.people.filter(p => p.id == state.selectedPersonId)[0].email = updatedPerson.email
+            state.people.filter(p => p.id == state.selectedPersonId)[0].address.city = updatedPerson.address.city
+            state.people.filter(p => p.id == state.selectedPersonId)[0].address.country = updatedPerson.address.country
+
+            //console.log('XX:name', state.people.filter(p => p.id == state.selectedPersonId)[0])                      
         },
 
-        deletePerson(state, idPerson){            
-            console.log('delete;', idPerson)
-            state.people = state.people.filter(p => p.id != idPerson)       
-            console.log(state.people)      
+        deletePerson(state, idPerson){                        
+            state.people = state.people.filter(p => p.id != idPerson)                   
         }
     }
 })

@@ -22,14 +22,12 @@
                query: { firstname: person.firstname, lastname: person.lastname } 
            }">Edit |</router-link> 
           </td>
-          <td><a href="#" class="btn btn-danger" @click="deletePerson(person.id)">Delete  |</a></td>
-          
+          <td><a href="#" class="btn btn-danger" @click="deletePerson(person.id)">Delete  |</a></td>          
         </tr>
       </tbody>
     </table>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -59,14 +57,13 @@ export default {
     },
 
     setIdPerson(editedPersonId){
-      this.$store.commit('setIdPerson', editedPersonId)    
-      console.log('this.editedPersonId' , editedPersonId)   
-    },
-
+      this.$store.commit('setIdPerson', editedPersonId)          
+    },          
+    
     deleteStorePerson(editedPersonId){
       this.$store.commit('deletePerson', editedPersonId)       
-    },
-    
+    },        
+
     deletePerson(personId) {      
       this.deleteStorePerson(personId)
     }
