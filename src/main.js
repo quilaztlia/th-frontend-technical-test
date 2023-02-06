@@ -35,18 +35,12 @@ const store = createStore({
             state.people = this.$store.state.people.concat(payload)
         },
 
-        updatePerson(state, updatedPerson){
-            //TODO
-            // console.log('selectedId', state.selectedPersonId)
-            // console.log('updatedPerson.firstname', updatedPerson.firstname)
-        
+        updatePerson(state, updatedPerson){        
             state.people.filter(p => p.id == state.selectedPersonId)[0].firstname = updatedPerson.firstname
             state.people.filter(p => p.id == state.selectedPersonId)[0].lastname = updatedPerson.lastname
             state.people.filter(p => p.id == state.selectedPersonId)[0].email = updatedPerson.email
             state.people.filter(p => p.id == state.selectedPersonId)[0].address.city = updatedPerson.address.city
-            state.people.filter(p => p.id == state.selectedPersonId)[0].address.country = updatedPerson.address.country
-
-            //console.log('XX:name', state.people.filter(p => p.id == state.selectedPersonId)[0])                      
+            state.people.filter(p => p.id == state.selectedPersonId)[0].address.country = updatedPerson.address.country            
         },
 
         deletePerson(state, idPerson){                        

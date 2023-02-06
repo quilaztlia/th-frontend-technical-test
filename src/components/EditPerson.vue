@@ -56,8 +56,8 @@ export default {
     this.form.firstname = editedPerson?.firstname
     this.form.lastname = editedPerson?.lastname
     this.form.email = editedPerson?.email
-    this.form.address.city = editedPerson.address.city
-    this.form.address.country = editedPerson.address.country
+    this.form.address.city = editedPerson?.address.city
+    this.form.address.country = editedPerson?.address.country
   },
 
   data() {
@@ -73,18 +73,9 @@ export default {
       this.$store.commit('updatePerson', editedPersonId, updatedPerson)
     },
 
-    updatePerson() {
-      console.log(this.editedPersonId)
+    updatePerson() {      
       this.setIdPerson(this.editedPersonId)
-
-      //let personId = this.$store.state.people.indexOf(p => p.id == this.editedPersonId)    
-      //console.log('personId', personId)  
-
-      // console.log('firstname', this.form)
       this.updateStorePerson(this.form)
-
-      //this.$store.state[personId] = this.form      
-      //console.log(this.editedPersonId)  
     },
 
     cancelUpdatePerson() {
